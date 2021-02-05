@@ -1,4 +1,4 @@
-package com.study.springboot.config;
+package com.study.springboot.config.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;

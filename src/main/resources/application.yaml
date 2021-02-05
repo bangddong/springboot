@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: local # 기본 환경 선택
+
+# local 환경
+---
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/spring_boot?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: ehdgusdl2
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop # 시작시 create, 종료시 drop
+  h2:
+    console:
+      enabled: true
+  config:
+    activate:
+      on-profile: local
+  mvc:
+    converters:
+      preferred-json-mapper: gson
+logging:
+  level:
+    root: info

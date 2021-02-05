@@ -1,5 +1,6 @@
-package com.study.springboot.config;
+package com.study.springboot.config.security;
 
+import com.study.springboot.config.handler.CustomLoginSuccessHandler;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,8 +44,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
+    // BCrypt 해시 함수 이용 비밀번호 해싱
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public CustomAuthenticationFilter customAuthenticationFilter() throws Exception {
+        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
+        customAuthenticationFilter.setFilterProcessesUrl("/user/login"); // 로그인 요청 URL
+        customAuthenticationFilter.setAuthenticationSuccessHandler(customLoginSuccessHandler()); // 로그인 성공 핸들러
+        customAuthenticationFilter.afterPropertiesSet(); // 생성된 Bean을 주입하기 위한 초기화
+        return customAuthenticationFilter;
+    }
+
+    @Bean
+    public CustomLoginSuccessHandler customLoginSuccessHandler() {
+        return new CustomLoginSuccessHandler();
     }
 }
