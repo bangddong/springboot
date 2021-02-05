@@ -31,7 +31,7 @@ public class UserController {
 
     @GetMapping("/loginView")
     public String loginView() {
-        return "user/login";
+        return "user/loginView";
     }
 
     @PostMapping(value = "/login")
@@ -41,10 +41,10 @@ public class UserController {
         userVO = userService.findUserByUserEmail(userVO.getUserEmail());
         if(userVO == null || !passwordEncoder.matches(userPw, userVO.getUserPw())){
             redirectAttributes.addFlashAttribute("rsMsg", "아이디 또는 비밀번호가 잘못되었습니다.");
-            return "redirect:/user/loginView";
+            return "user/loginView";
         }
         request.getSession().setAttribute("userVO", userVO); // 로그인 성공시 세션에 유저 정보 삽입
-        return "redirect:/index";
+        return "index";
     }
 
     @GetMapping(value = "/init")
@@ -56,12 +56,13 @@ public class UserController {
             log.error("Create Admin Error");
         }
 
-        userVO.setUserEmail("admin@naver.com");
+        userVO.setUserEmail("test@naver.com");
         userVO.setUserPw(passwordEncoder.encode("test"));
         userVO.setRole(UserRole.ADMIN);
         if(userService.createUser(userVO) == null){
             log.error("Create Admin Error");
         }
-        return "redirect:/index";
+        //return "redirect:/index";
+        return "user/loginView";
     }
 }

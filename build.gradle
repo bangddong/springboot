@@ -21,7 +21,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // JPA
     implementation 'org.springframework.boot:spring-boot-starter-security' // Spring-security
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // JSP 대신 tymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // tymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-web' // 스프링부트 쵝오.
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     compileOnly 'org.projectlombok:lombok'
