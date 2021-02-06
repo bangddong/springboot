@@ -24,23 +24,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                // about 요청시 로그인 요구
-                .antMatchers("/about").authenticated()
+                // 특정 URL에 대한 로그인 요청. 아래 예시는 /about URL에 대한 인증을 검사.
+                //.antMatchers("/about").authenticated()
+                .antMatchers("/user/register").permitAll()
                 // admin 요청시 ROLE_ADMIN 역활을 가지고 있어야 함
                 .antMatchers("/admin").hasRole("ADMIN")
                 // 나머지 요청은 로그인 필요X
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
                 .and()
-                // 로그인하는 경우 설정
+                // 로그인하는 경우 설정 ( Form 방식의 로그인 )
                 .formLogin()
                 // 로그인 페이지 URL
                 .loginPage("/user/loginView")
                 // 로그인 성공 URL
                 .successForwardUrl("/index")
                 // 로그인 실패 URL
-                .failureForwardUrl("/index")
+                .failureForwardUrl("/user/loginView")
                 .permitAll()
                 .and()
+                // 로그인시 사용할 필터
                 .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 

@@ -20,6 +20,5 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UserNotFoundException {
         return userRepository.findByUserEmail(userEmail).map(u -> new UserDetailVO(u, Collections.singleton(new SimpleGrantedAuthority(u.getRole().getValue())))).orElseThrow(() -> new UserNotFoundException(userEmail));
-
     }
 }

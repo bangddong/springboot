@@ -10,12 +10,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 @RequiredArgsConstructor // 생성자 자동 주입 ( Autowired )
 @Controller
@@ -34,26 +31,32 @@ public class UserController {
         return "user/loginView";
     }
 
-    @PostMapping(value = "/login")
-    public String login(HttpServletRequest request, RedirectAttributes redirectAttributes, @ModelAttribute UserVO userVO){
-        log.error("@@@");
-        String userPw = userVO.getUserPw();
-        userVO = userService.findUserByUserEmail(userVO.getUserEmail());
-        if(userVO == null || !passwordEncoder.matches(userPw, userVO.getUserPw())){
-            redirectAttributes.addFlashAttribute("rsMsg", "아이디 또는 비밀번호가 잘못되었습니다.");
-            return "user/loginView";
-        }
-        request.getSession().setAttribute("userVO", userVO); // 로그인 성공시 세션에 유저 정보 삽입
-        return "index";
+    @GetMapping("/register")
+    public String register() {
+        return "user/register";
     }
 
-    @GetMapping(value = "/init")
+//    @PostMapping("/login")
+//    public String login(HttpServletRequest request, RedirectAttributes redirectAttributes, @ModelAttribute UserVO userVO) throws UserNotFoundException
+//    {
+//        log.error("@@@");
+//        String userPw = userVO.getUserPw();
+//        userVO = userService.findUserByUserEmail(userVO.getUserEmail());
+//        if(userVO == null || !passwordEncoder.matches(userPw, userVO.getUserPw())){
+//            redirectAttributes.addFlashAttribute("rsMsg", "아이디 또는 비밀번호가 잘못되었습니다.");
+//            return "user/loginView";
+//        }
+//        request.getSession().setAttribute("userVO", userVO); // 로그인 성공시 세션에 유저 정보 삽입
+//        return "index";
+//    }
+
+    @GetMapping("/init")
     public String createAdmin(@ModelAttribute UserVO userVO){
         userVO.setUserEmail("user@naver.com");
         userVO.setUserPw(passwordEncoder.encode("test"));
         userVO.setRole(UserRole.USER); // UserRole은 ENUM으로 정의중. 추가하면 role을 수정 할 것.
         if(userService.createUser(userVO) == null){
-            log.error("Create Admin Error");
+            log.error("Create User Error");
         }
 
         userVO.setUserEmail("test@naver.com");

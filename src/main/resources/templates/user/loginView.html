@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      >
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 반응형 설정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/css/image/favicon.png}">
+    <title>로그인</title>
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/css/plugins/bootstrap.min.css}" rel="stylesheet">
+    <!-- page css -->
+    <link th:href="@{/css/login/login-register-lock.css}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    
+    <!-- 테마 색깔 설정 -->
+    <link th:href="@{/css/colors/default-dark.css}" id="theme" rel="stylesheet">
+</head>
+
+<body class="card-no-border">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Admin Pro</p>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <section id="wrapper">
+        <div class="login-register" style="background-image:url(/css/image/login-register.jpg);">
+            <div class="login-box card">
+                <div class="card-body">
+                    <form class="form-horizontal form-material" id="loginform" action="/user/login" method="post">
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="text" required="" placeholder="E-Mail" name="userEmail"> </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="password" required="" placeholder="Password" name="userPw"> </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <div class="checkbox checkbox-info float-left p-t-0">
+                                    <input id="checkbox-signup" type="checkbox" class="filled-in chk-col-light-blue">
+                                    <label for="checkbox-signup"> 아이디 저장 </label>
+                                </div> <a href="javascript:void(0)" id="to-recover" class="text-muted float-right"><i class="fa fa-lock m-r-5"></i> 비밀번호 찾기</a> </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <div class="col-xs-12 p-b-20">
+                                <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">로그인</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
+                                <div class="social">
+                                    <!-- 아직 미구현
+                                    <a href="javascript:void(0)" class="btn  btn-facebook" data-toggle="tooltip" title="Login with Facebook"> <i aria-hidden="true" class="fab fa-facebook-f"></i> </a>
+                                    <a href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip" title="Login with Google"> <i aria-hidden="true" class="fab fa-google-plus-g"></i> </a>
+                                    -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group m-b-0">
+                            <div class="col-sm-12 text-center">
+                                <a href="/user/register" class="text-info m-l-5"><b>회원가입</b></a>
+                            </div>
+                        </div>
+                    </form>
+                    <form class="form-horizontal" id="recoverform" action="index.html">
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                <h3>비밀번호 찾기</h3>
+                                <p class="text-muted">가입시 입력한 이메일로 초기화 비밀번호를 발송해드립니다. </p>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="text" required="" placeholder="Email"> </div>
+                        </div>
+                        <div class="form-group text-center m-t-20">
+                            <div class="col-xs-12" style="margin-bottom: 15px;">
+                                <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">이메일 발송</button>
+                            </div>
+                            <a href="javascript:void(0)" id="to-login" class="text-muted float-right"> 로그인 화면으로</a> </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script th:src="@{/js/plugins/jquery.min.js}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script th:src="@{/js/plugins/popper.min.js}"></script>
+    <script th:src="@{/js/plugins/bootstrap.min.js}"></script>
+    <!--Custom JavaScript -->
+    <script type="text/javascript">
+        $(function() {
+            $(".preloader").fadeOut();
+        });
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+        // ============================================================== 
+        // Login and Recover Password 
+        // ============================================================== 
+        $('#to-recover').on("click", function() {
+            $("#loginform").slideUp();
+            $("#recoverform").fadeIn();
+        });
+        $('#to-login').on("click", function() {
+            $("#recoverform").slideUp();
+            $("#loginform").fadeIn();
+        });
+    </script>
+    
+</body>
+
+</html>

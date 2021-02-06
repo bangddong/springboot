@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class UserVO extends CommonVO implements Serializable {
 
     @Setter
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(nullable = false, length = 50)
     private String userEmail;
 
     @Setter
