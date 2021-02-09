@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="head-config">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+    <title>
+        <th:block layout:fragment="title">layout title</th:block>
+    </title>
+
+    <!-- 공통 css -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 반응형 설정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/css/image/favicon.png}">
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/css/plugins/bootstrap.min.css}" rel="stylesheet">
+    <!-- page css -->
+    <link th:href="@{/css/login/login-register-lock.css}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <!-- 테마 색깔 설정 -->
+    <link th:href="@{/css/colors/default-dark.css}" id="theme" rel="stylesheet">
+
+    <!-- 공통 JS -->
+    <script defer th:src="@{/js/plugins/jquery.min.js}"></script>
+    <script defer th:src="@{/js/plugins/popper.min.js}"></script>
+    <script defer th:src="@{/js/plugins/bootstrap.min.js}"></script>
+
+</head>
+</html>

@@ -3,27 +3,14 @@
       xmlns:th="http://www.thymeleaf.org"
       >
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- 반응형 설정 ee-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/css/image/favicon.png}">
+<head th:replace="fragments/headConfig :: head-config">
     <title>로그인</title>
-    <!-- Bootstrap Core CSS -->
-    <link th:href="@{/css/plugins/bootstrap.min.css}" rel="stylesheet">
-    <!-- page css -->
-    <link th:href="@{/css/login/login-register-lock.css}" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link th:href="@{/css/style.css}" rel="stylesheet">
-    
-    <!-- 테마 색깔 설정 -->
-    <link th:href="@{/css/colors/default-dark.css}" id="theme" rel="stylesheet">
 </head>
 
 <body class="card-no-border">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
@@ -86,25 +73,14 @@
                             <div class="col-xs-12" style="margin-bottom: 15px;">
                                 <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">이메일 발송</button>
                             </div>
-                            <a href="javascript:void(0)" id="to-login" class="text-muted float-right"> 로그인 화면으로</a> </div>
+                            <a href="javascript:void(0)" id="to-login" class="text-muted float-right"> 로그인 화면으로</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script th:src="@{/js/plugins/jquery.min.js}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script th:src="@{/js/plugins/popper.min.js}"></script>
-    <script th:src="@{/js/plugins/bootstrap.min.js}"></script>
-    <!--Custom JavaScript -->
+
     <script type="text/javascript">
         $(function() {
             $(".preloader").fadeOut();

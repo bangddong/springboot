@@ -1,26 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
->
+      xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- 반응형 설정 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/css/image/favicon.png}">
+<head th:replace="fragments/headConfig :: head-config">
     <title>회원가입</title>
-    <!-- Bootstrap Core CSS -->
-    <link th:href="@{/css/plugins/bootstrap.min.css}" rel="stylesheet">
-    <!-- page css -->
-    <link th:href="@{/css/login/login-register-lock.css}" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link th:href="@{/css/style.css}" rel="stylesheet">
-
-    <!-- 테마 색깔 설정 -->
-    <link th:href="@{/css/colors/default-dark.css}" id="theme" rel="stylesheet">
 </head>
 
 <body class="card-no-border">
