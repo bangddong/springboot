@@ -26,14 +26,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 // 특정 URL에 대한 로그인 요청. 아래 예시는 /about URL에 대한 인증을 검사.
                 //.antMatchers("/about").authenticated()
-                .antMatchers("/user/register").permitAll()
+                .antMatchers("/user/register", "/user/init").permitAll()
                 // admin 요청시 ROLE_ADMIN 역활을 가지고 있어야 함
                 .antMatchers("/admin").hasRole("ADMIN")
                 // 나머지 요청은 로그인 필요X
                 .anyRequest().authenticated()
                 .and()
                 // 로그인하는 경우 설정 ( Form 방식의 로그인 )
-                .formLogin()
+            .formLogin()
                 // 로그인 페이지 URL
                 .loginPage("/user/loginView")
                 // 로그인 성공 URL
@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 // 로그인시 사용할 필터
-                .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     // BCrypt 해시 함수 이용 비밀번호 해싱
@@ -55,8 +55,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CustomAuthenticationFilter customAuthenticationFilter() throws Exception {
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
-        customAuthenticationFilter.setFilterProcessesUrl("/user/login"); // 로그인 요청 URL
+        customAuthenticationFilter.setFilterProcessesUrl("/user/login"); // 로그인 요청 URL, 스프링에서 제공하니 별도로 컨트롤러 설정 필요 X
         customAuthenticationFilter.setAuthenticationSuccessHandler(customLoginSuccessHandler()); // 로그인 성공 핸들러
+        // customAuthenticationFilter.setAuthenticationFailureHandler(); 로그인 실패 핸들러도 정의 가능.
         customAuthenticationFilter.afterPropertiesSet(); // 생성된 Bean을 주입하기 위한 초기화
         return customAuthenticationFilter;
     }
