@@ -17,7 +17,11 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         super.setAuthenticationManager(authenticationManager);
     }
 
-    // 로그인폼에서 넘어온 데이터 처리
+
+    /**
+     * 로그인폼에서 넘어온 데이터 처리
+     * 실제 로직은 CustomAuthenticationProvider에서 수행
+     */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(request.getParameter("userEmail"), request.getParameter("userPw"));

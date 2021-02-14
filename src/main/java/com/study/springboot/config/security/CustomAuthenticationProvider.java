@@ -14,6 +14,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.Resource;
 
+/**
+ * 로그인 인증시 request에 넘어온 정버를 토대로 DB와 조회
+ * 성공시 인증정보를 담아 successHandler 실행.
+ * 실패시 예외를 담아 faliHandler 실행.
+ */
 @RequiredArgsConstructor
 @Log4j2
 public class CustomAuthenticationProvider implements AuthenticationProvider {
