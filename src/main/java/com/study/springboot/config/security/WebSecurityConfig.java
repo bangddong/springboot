@@ -1,5 +1,6 @@
 package com.study.springboot.config.security;
 
+import com.study.springboot.config.handler.CustomLoginFailHandler;
 import com.study.springboot.config.handler.CustomLoginSuccessHandler;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/register", "/user/init").permitAll()
                 // admin 요청시 ROLE_ADMIN 역활을 가지고 있어야 함
                 .antMatchers("/admin").hasRole("ADMIN")
-                // 나머지 요청은 로그인 필요X
+                // 나머지 요청은 무조건 로그인 필요
                 .anyRequest().authenticated()
                 .and()
                 // 로그인하는 경우 설정 ( Form 방식의 로그인 )
@@ -57,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
         customAuthenticationFilter.setFilterProcessesUrl("/user/login"); // 로그인 요청 URL, 스프링에서 제공하니 별도로 컨트롤러 설정 필요 X
         customAuthenticationFilter.setAuthenticationSuccessHandler(customLoginSuccessHandler()); // 로그인 성공 핸들러
-        // customAuthenticationFilter.setAuthenticationFailureHandler(); 로그인 실패 핸들러도 정의 가능.
+        customAuthenticationFilter.setAuthenticationFailureHandler(customLoginFailHandler()); // 로그인 실패 핸들러도 정의 가능.
         customAuthenticationFilter.afterPropertiesSet(); // 생성된 Bean을 주입하기 위한 초기화
         return customAuthenticationFilter;
     }
@@ -66,4 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public CustomLoginSuccessHandler customLoginSuccessHandler() {
         return new CustomLoginSuccessHandler();
     }
+
+    @Bean
+    public CustomLoginFailHandler customLoginFailHandler() { return new CustomLoginFailHandler(); }
 }
